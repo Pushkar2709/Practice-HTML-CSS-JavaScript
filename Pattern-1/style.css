@@ -1,0 +1,10 @@
+body {
+    background-color: black;
+}
+
+#text {
+    text-transform: uppercase;
+    font-size: 50px;
+    font-weight: 500;
+    color: white;
+}

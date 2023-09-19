@@ -1,0 +1,29 @@
+body {
+    background-color: black;
+    overflow: hidden;
+}
+
+#blob {
+    width: 200px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    background: linear-gradient(red, blue);
+    filter: blur(100px);
+    animation-name: rotate;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+}
+
+@keyframes rotate {
+    from {
+        rotate: 0;
+    }
+
+    to {
+        rotate: 360deg;
+    }
+}

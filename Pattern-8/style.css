@@ -1,0 +1,30 @@
+html {
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+    user-select: none;
+    position: relative;
+}
+
+#container {
+    height: 50%;
+    display: flex;
+    gap: 1%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: 0 -50%;
+}
+
+img {
+    height: 100%;
+    aspect-ratio: 0.7;
+    object-fit: cover;
+    translate: -50%;
+    object-position: 100% 50%;
+}

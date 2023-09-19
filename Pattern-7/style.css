@@ -1,0 +1,141 @@
+html {
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#heading {
+    color: white;
+    height: 20%;
+    font-size: 10vw;
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#title-box {
+    width: 50vw;
+    height: 100%;
+    border: 1px solid white;
+    border-radius: 10vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+#hidden {
+    transform-origin: 0 bottom;
+    transform: scaleY(0);
+}
+
+#shown {
+    transform-origin: 0 top;
+}
+
+#content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80%;
+}
+
+.container {
+    position: relative;
+    height: 25vw;
+    aspect-ratio: 1;
+}
+
+.image-1 {
+    background: url("https://images.unsplash.com/photo-1693461564009-b8d92aceea64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80");
+}
+
+.image-2 {
+    background: url("https://images.unsplash.com/photo-1693323818815-3fdf08c33605?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80");
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+    border-radius: 10%;
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid black;
+}
+
+.back-image {
+    z-index: -1;
+    filter: blur(2px);
+}
+
+.back-image:nth-child(2) {
+    animation: right 3s ease-in infinite;
+}
+
+.back-image:nth-child(3) {
+    animation: left 3s ease-in infinite;
+}
+
+.back-image:nth-child(4) {
+    animation: right 3s ease-in 1s infinite;
+}
+
+.back-image:nth-child(5) {
+    animation: left 3s ease-in 1s infinite;
+}
+
+.back-image:nth-child(6) {
+    animation: right 3s ease-in 2s infinite;
+}
+
+.back-image:nth-child(7) {
+    animation: left 3s ease-in 2s infinite;
+}
+
+@keyframes right {
+    from {
+        transform: translateX(0);
+        opacity: 0.5;
+        scale: 1;
+    }
+    to {
+        transform: translateX(12vw);
+        opacity: 0;
+        scale: 0.8;
+    }
+}
+
+@keyframes left {
+    from {
+        transform: translateX(0);
+        opacity: 0.5;
+        scale: 1;
+    }
+    to {
+        transform: translateX(-12vw);
+        opacity: 0;
+        scale: 0.8;
+    }
+}

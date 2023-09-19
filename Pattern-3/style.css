@@ -1,0 +1,56 @@
+html, body {
+    height: 100vh;
+    margin: 0px 0px;
+}
+
+.screen {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 5rem;
+    font-weight: bold;
+    font-family: 'Tilt Prism', cursive;
+    width: 60vw;
+    text-align: center;
+    margin: 30vh 20vw;
+}
+
+.fancy {
+    font-family: 'Dancing Script', cursive;
+    font-size: 7rem;
+}
+
+#leftSide {
+    z-index: 1;
+    background-color: #8833d2;
+    width: 70vw;
+    color: white;
+    animation: bar 1s;
+}
+
+#leftSide .fancy {
+    color: #ff9900;
+}
+
+#rightSide {
+    background-color: #ff9900;
+    color: white;
+}
+
+#rightSide .fancy {
+    color: #8833d2;
+}
+
+@keyframes bar {
+    from {
+        width: 100vw;
+    }
+
+    to {
+        width: 70vw;
+    }
+}
