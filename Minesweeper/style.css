@@ -1,0 +1,33 @@
+html, body {
+    height: 100vh;
+}
+
+#grid {
+    height: 50%;
+}
+
+#gridRow {
+    /* height: calc(100% / 16); */
+    display: flex;
+}
+
+#block {
+    height: 50px;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-family: monospace;
+}
+
+.hidden {
+    background-color: rgb(202, 202, 202);
+}
+
+.flag {
+    /* background: url("https://e7.pngegg.com/pngimages/1008/604/png-clipart-red-pennant-flag-red-flag-small-red-flag-miscellaneous-angle.png"); */
+    background: url("https://st.depositphotos.com/12141488/52819/v/450/depositphotos_528192978-stock-illustration-vector-flag-marker-icon-illustration.jpg");
+    background-size: cover;
+}
