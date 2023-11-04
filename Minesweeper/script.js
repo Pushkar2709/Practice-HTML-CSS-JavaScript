@@ -1,12 +1,18 @@
 const gridElement = document.getElementById("grid");
+const minesLeftElement = document.getElementById("minesLeft");
+const resultElement = document.getElementById("result");
 
 const numRow = 8;
 const numCol = 8;
 const numMines = 10;
+
 const visitedBlocks = [];
 const minefield = generateField();
 const blockElements = [];
 let firstClick = true;
+let minesLeft = numMines;
+let openedBlocks = 0;
+let gameOver = false;
 
 displayField();
 
@@ -65,6 +71,7 @@ function displayField() {
             blockElement.column = j;
             blockElement.classList.toggle("hidden");
             blockElement.addEventListener("click", (e) => {
+                if (gameOver) return;
                 const x = e.target.row;
                 const y = e.target.column;
                 if (firstClick) {
@@ -74,16 +81,30 @@ function displayField() {
                 if (minefield[x][y] === -1) {
                     if (!e.target.classList.contains("flag")) {
                         e.target.classList.remove("hidden");
-                        e.target.innerHTML = minefield[x][y] === 0 ? "" : minefield[x][y];
+                        e.target.innerHTML = minefield[x][y];
+                        e.target.classList.toggle("red-font");
+                        gameOver = true;
+                        resultElement.innerHTML = "YOU LOSE!!";
                     }
                 } else {
                     openBlock(x, y);
+                    if (openedBlocks === (numRow * numCol) - numMines) {
+                        gameOver = true;
+                        resultElement.innerHTML = "WINNER!!";
+                    }
                 }
             })
             blockElement.addEventListener("contextmenu", (e) => {
+                if (gameOver) return;
                 if (e.target.classList.contains("hidden")) {
                     e.target.classList.toggle("flag");
+                    if (e.target.classList.contains("flag")) {
+                        minesLeft--;
+                    } else {
+                        minesLeft++;
+                    }
                 }
+                minesLeftElement.innerHTML = "Mines Left: " + minesLeft;
             });
             gridRowElement.appendChild(blockElement);
             blockElementsRow.push(blockElement);
@@ -91,6 +112,7 @@ function displayField() {
         gridElement.appendChild(gridRowElement);
         blockElements.push(blockElementsRow);
     }
+    minesLeftElement.innerHTML = "Mines Left: " + minesLeft;
 }
 
 function openBlock(x, y) {
@@ -103,6 +125,7 @@ function openBlock(x, y) {
         blockElements[x][y].classList.remove("hidden");
         blockElements[x][y].innerHTML = minefield[x][y] === 0 ? "" : minefield[x][y];
         visitedBlocks[x][y] = true;
+        openedBlocks++;
         if (minefield[x][y] === 0) {
             const t = [-1, 0, 1];
             for (let i=0;i<3;i++) {

@@ -1,9 +1,6 @@
 html, body {
     height: 100vh;
-}
-
-#grid {
-    height: 50%;
+    font-size: 1.5rem;
 }
 
 #gridRow {
@@ -18,7 +15,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: monospace;
 }
 
@@ -30,4 +27,8 @@ html, body {
     /* background: url("https://e7.pngegg.com/pngimages/1008/604/png-clipart-red-pennant-flag-red-flag-small-red-flag-miscellaneous-angle.png"); */
     background: url("https://st.depositphotos.com/12141488/52819/v/450/depositphotos_528192978-stock-illustration-vector-flag-marker-icon-illustration.jpg");
     background-size: cover;
+}
+
+.red-font {
+    color: red;
 }
