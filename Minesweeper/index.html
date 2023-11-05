@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>Minesweeper</title>
 </head>
+
 <body>
-    <div>
-        <select id="difficulty" name="difficultySelector" >
-            <option value="beginner" >Beginner</option>
-            <option value="intermediate" >Intermediate</option>
-            <option value="expert" >Expert</option>
-        </select>
-        <button onclick="reset()" >New Game</button>
+    <div class="d-flex justify-content-center p-2">
+        <h1 class="display-1">Minesweeper</h1>
     </div>
-    <div id="grid"></div>
-    <div>
-        <div id="result"></div>
-        <div id="minesLeft"></div>
-    </div>
+    <main class="d-flex flex-column justify-content-between align-items-center">
+        <div class="d-flex justify-content-around w-50 p-2 fs-4">
+            <div>
+                <select id="difficulty" class="form-select" name="difficultySelector">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="expert">Expert</option>
+                </select>
+            </div>
+            <button class="btn btn-dark" onclick="reset()">New Game</button>
+            <div>Mines Left: <span id="minesLeft" class="text-danger"></span></div>
+        </div>
+        <div id="grid" class="h-75 p-3"></div>
+        <div id="result" class="p-2 fs-1"></div>
+    </main>
     <script src="script.js"></script>
 </body>
+
 </html>

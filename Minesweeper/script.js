@@ -14,6 +14,7 @@ let firstClick = true;
 let minesLeft = numMines;
 let openedBlocks = 0;
 let gameOver = false;
+let difficulty = "beginner";
 
 displayField();
 
@@ -65,14 +66,15 @@ function displayField() {
     resultElement.innerHTML = "";
     for (let i = 0; i < minefield.length; i++) {
         const gridRowElement = document.createElement("div");
-        gridRowElement.id = "gridRow";
+        gridRowElement.classList.toggle("gridRow");
         const blockElementsRow = [];
         for (let j = 0; j < minefield[0].length; j++) {
             const blockElement = document.createElement("div");
-            blockElement.id = "block";
             blockElement.row = i;
             blockElement.column = j;
+            blockElement.classList.toggle("block");
             blockElement.classList.toggle("hidden");
+            blockElement.classList.toggle(`${difficulty}-block-size`);
             blockElement.addEventListener("click", (e) => {
                 if (gameOver) return;
                 const x = e.target.row;
@@ -84,16 +86,18 @@ function displayField() {
                 if (minefield[x][y] === -1) {
                     if (!e.target.classList.contains("flag")) {
                         e.target.classList.remove("hidden");
-                        e.target.innerHTML = minefield[x][y];
+                        e.target.style.backgroundImage = "url('https://m.media-amazon.com/images/I/61V2cX4JqGL.png')";
                         e.target.classList.toggle("red-font");
                         gameOver = true;
                         resultElement.innerHTML = "YOU LOSE!!";
+                        resultElement.style.color = "red";
                     }
                 } else {
                     openBlock(x, y);
                     if (openedBlocks === (numRow * numCol) - numMines) {
                         gameOver = true;
                         resultElement.innerHTML = "WINNER!!";
+                        resultElement.style.color = "green";
                     }
                 }
             })
@@ -107,7 +111,7 @@ function displayField() {
                         minesLeft++;
                     }
                 }
-                minesLeftElement.innerHTML = "Mines Left: " + minesLeft;
+                minesLeftElement.innerHTML = minesLeft;
             });
             gridRowElement.appendChild(blockElement);
             blockElementsRow.push(blockElement);
@@ -115,7 +119,7 @@ function displayField() {
         gridElement.appendChild(gridRowElement);
         blockElements.push(blockElementsRow);
     }
-    minesLeftElement.innerHTML = "Mines Left: " + minesLeft;
+    minesLeftElement.innerHTML = minesLeft;
 }
 
 function openBlock(x, y) {
@@ -140,7 +144,7 @@ function openBlock(x, y) {
 }
 
 const reset = () => {
-    let difficulty = difficultySelectorElement.value;
+    difficulty = difficultySelectorElement.value;
     if (difficulty === "beginner") {
         numRow = numCol = 8;
         numMines = 10;

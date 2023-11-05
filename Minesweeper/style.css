@@ -1,22 +1,27 @@
 html, body {
     height: 100vh;
-    font-size: 1.5rem;
 }
 
-#gridRow {
-    /* height: calc(100% / 16); */
+main {
+    height: 85%;
+    font-family: monospace;
+    background-color: burlywood;
+}
+
+.gridRow {
     display: flex;
 }
 
-#block {
-    height: 50px;
+.block {
     aspect-ratio: 1;
     border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    font-family: monospace;
+    border-radius: 5px;
+    background-color: white;
+    background-size: cover;
 }
 
 .hidden {
@@ -24,11 +29,21 @@ html, body {
 }
 
 .flag {
-    /* background: url("https://e7.pngegg.com/pngimages/1008/604/png-clipart-red-pennant-flag-red-flag-small-red-flag-miscellaneous-angle.png"); */
     background: url("https://st.depositphotos.com/12141488/52819/v/450/depositphotos_528192978-stock-illustration-vector-flag-marker-icon-illustration.jpg");
-    background-size: cover;
 }
 
 .red-font {
     color: red;
+}
+
+.beginner-block-size {
+    height: 50px;
+}
+
+.intermediate-block-size {
+    height: 40px;
+}
+
+.expert-block-size {
+    height: 40px;
 }
