@@ -30,6 +30,7 @@ main {
 
 .flag {
     background: url("https://st.depositphotos.com/12141488/52819/v/450/depositphotos_528192978-stock-illustration-vector-flag-marker-icon-illustration.jpg");
+    background-size: cover;
 }
 
 .red-font {
