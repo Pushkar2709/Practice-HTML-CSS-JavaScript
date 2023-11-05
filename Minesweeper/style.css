@@ -18,10 +18,8 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
     border-radius: 5px;
     background-color: white;
-    background-size: cover;
 }
 
 .hidden {
@@ -29,7 +27,12 @@ main {
 }
 
 .flag {
-    background: url("https://st.depositphotos.com/12141488/52819/v/450/depositphotos_528192978-stock-illustration-vector-flag-marker-icon-illustration.jpg");
+    background: url("https://play-lh.googleusercontent.com/S1h8A8cR9s1aLOkFwZJjPRaB4HG6DEWwEUOn_x4olAg-d45vTbt65GkJWYyozANaahM");
+    background-size: cover;
+}
+
+.bomb {
+    background: url("https://m.media-amazon.com/images/I/61V2cX4JqGL.png");
     background-size: cover;
 }
 
@@ -38,13 +41,16 @@ main {
 }
 
 .beginner-block-size {
-    height: 50px;
+    height: calc(100vh/15);
+    font-size: 2rem;
 }
 
 .intermediate-block-size {
-    height: 40px;
+    height: calc(100vh/25);
+    font-size: 1.5rem;
 }
 
 .expert-block-size {
-    height: 40px;
+    height: calc(100vh/25);
+    font-size: 1.5rem;
 }

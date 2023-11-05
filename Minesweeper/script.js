@@ -86,10 +86,9 @@ function displayField() {
                 if (minefield[x][y] === -1) {
                     if (!e.target.classList.contains("flag")) {
                         e.target.classList.remove("hidden");
-                        e.target.style.backgroundImage = "url('https://m.media-amazon.com/images/I/61V2cX4JqGL.png')";
-                        e.target.classList.toggle("red-font");
+                        e.target.classList.toggle("bomb");
                         gameOver = true;
-                        resultElement.innerHTML = "YOU LOSE!!";
+                        resultElement.innerHTML = "YOU LOST!!";
                         resultElement.style.color = "red";
                     }
                 } else {
@@ -102,7 +101,7 @@ function displayField() {
                 }
             })
             blockElement.addEventListener("contextmenu", (e) => {
-                if (gameOver) return;
+                if (gameOver || firstClick) return;
                 if (e.target.classList.contains("hidden")) {
                     e.target.classList.toggle("flag");
                     if (e.target.classList.contains("flag")) {
