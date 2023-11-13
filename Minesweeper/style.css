@@ -20,6 +20,7 @@ main {
     align-items: center;
     border-radius: 5px;
     background-color: white;
+    user-select: none;
 }
 
 .hidden {
@@ -38,6 +39,10 @@ main {
 
 .red-font {
     color: red;
+}
+
+.red-background {
+    background-color: red;
 }
 
 .beginner-block-size {

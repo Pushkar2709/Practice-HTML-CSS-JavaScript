@@ -16,6 +16,8 @@ let openedBlocks = 0;
 let gameOver = false;
 let difficulty = "beginner";
 
+const t = [-1, 0, 1];
+
 displayField();
 
 function generateField() {
@@ -47,7 +49,6 @@ function populateField(excludeX, excludeY) {
             }
         }
     }
-    const t = [-1, 0, 1];
     mines.forEach(([x, y]) => {
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
@@ -63,7 +64,8 @@ function populateField(excludeX, excludeY) {
 
 function displayField() {
     gridElement.innerHTML = "";
-    resultElement.innerHTML = "";
+    resultElement.innerHTML = "Result";
+    resultElement.style.color = "burlywood";
     for (let i = 0; i < minefield.length; i++) {
         const gridRowElement = document.createElement("div");
         gridRowElement.classList.toggle("gridRow");
@@ -93,6 +95,17 @@ function displayField() {
                     }
                 } else {
                     openBlock(x, y);
+                    visitedBlocks = [];
+                    for (let i = 0; i < numRow; i++) {
+                        const visitedRow = [];
+                        for (let j = 0; j < numCol; j++) {
+                            visitedRow.push(false);
+                        }
+                        visitedBlocks.push(visitedRow);
+                    }
+                    if (!e.target.classList.contains("hidden")) {
+                        autoFlag(x, y);
+                    }
                     if (openedBlocks === (numRow * numCol) - numMines) {
                         gameOver = true;
                         resultElement.innerHTML = "WINNER!!";
@@ -103,12 +116,13 @@ function displayField() {
             blockElement.addEventListener("contextmenu", (e) => {
                 if (gameOver || firstClick) return;
                 if (e.target.classList.contains("hidden")) {
-                    e.target.classList.toggle("flag");
-                    if (e.target.classList.contains("flag")) {
-                        minesLeft--;
-                    } else {
-                        minesLeft++;
-                    }
+                    e.target.classList.add("flag");
+                    e.target.classList.remove("hidden");
+                    minesLeft--;
+                } else if (e.target.classList.contains("flag")) {
+                    e.target.classList.remove("flag");
+                    e.target.classList.add("hidden");
+                    minesLeft++;
                 }
                 minesLeftElement.innerHTML = minesLeft;
             });
@@ -127,19 +141,70 @@ function openBlock(x, y) {
     if (minefield[x][y] === -1) return;
     if (visitedBlocks[x][y]) return;
     if (!blockElements[x][y].classList.contains("flag")) {
+        if (blockElements[x][y].classList.contains("hidden")) {
+            openedBlocks++;
+        }
         blockElements[x][y].classList.remove("hidden");
-        blockElements[x][y].innerHTML = minefield[x][y] === 0 ? "" : minefield[x][y];
         visitedBlocks[x][y] = true;
-        openedBlocks++;
-        if (minefield[x][y] === 0) {
-            const t = [-1, 0, 1];
+        let flaggedBlocks = 0;
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if ((x + t[i] >= 0 && x + t[i] < numRow) && (y + t[j] >= 0 && y + t[j] < numCol)) {
+                    if (blockElements[x + t[i]][y + t[j]].classList.contains("flag")) {
+                        flaggedBlocks++;
+                    }
+                }
+            }
+        }
+        if (minefield[x][y] === flaggedBlocks) {
             for (let i = 0; i < 3; i++) {
                 for (let j = 0; j < 3; j++) {
                     openBlock(x + t[i], y + t[j]);
                 }
             }
         }
+    } else {
+        blockElements[x][y].classList.remove("flag");
+        blockElements[x][y].classList.toggle("red-background");
+        gameOver = true;
+        resultElement.innerHTML = "YOU LOST!!";
+        resultElement.style.color = "red";
     }
+    blockElements[x][y].innerHTML = minefield[x][y] === 0 ? "" : minefield[x][y];
+}
+
+function autoFlag(x, y) {
+    let hiddenBlocks = 0, flaggedBlocks = 0;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if ((x + t[i] >= 0 && x + t[i] < numRow) && (y + t[j] >= 0 && y + t[j] < numCol)) {
+                if (blockElements[x + t[i]][y + t[j]].classList.contains("hidden")) {
+                    hiddenBlocks++;
+                }
+                if (blockElements[x + t[i]][y + t[j]].classList.contains("flag")) {
+                    flaggedBlocks++;
+                }
+            }
+        }
+    }
+    if (hiddenBlocks === minefield[x][y] - flaggedBlocks) {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if ((x + t[i] >= 0 && x + t[i] < numRow) && (y + t[j] >= 0 && y + t[j] < numCol)) {
+                    if (blockElements[x + t[i]][y + t[j]].classList.contains("hidden")) {
+                        blockElements[x + t[i]][y + t[j]].classList.toggle("flag");
+                        blockElements[x + t[i]][y + t[j]].classList.toggle("hidden");
+                        if (blockElements[x + t[i]][y + t[j]].classList.contains("flag")) {
+                            minesLeft--;
+                        } else {
+                            minesLeft++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    minesLeftElement.innerHTML = minesLeft;
 }
 
 const reset = () => {
